@@ -36,7 +36,7 @@ A secure and scalable REST API for transferring funds between accounts built wit
 
 ```bash
 # If using existing docker setup, copy the fund_transfer_api folder to your project root
-cd ~/Documents/laravel-vue-docker
+cd ~/Documents/Projects/fund_transfer_api
 # The fund_transfer_api folder should be at the same level as 'src' folder
 ```
 
@@ -52,7 +52,7 @@ Your `docker-compose.yml` should already include the Symfony services. The confi
 ### 3. Start Docker Containers
 
 ```bash
-# From your project root (~/Documents/laravel-vue-docker)
+# From your project root (~/Documents/Projects/fund_transfer_api)
 docker-compose up -d
 ```
 
