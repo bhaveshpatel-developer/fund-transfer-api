@@ -1,0 +1,132 @@
+{
+  "info": {
+    "name": "Fund Transfer API",
+    "description": "Collection for testing the Fund Transfer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8001/api/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8001",
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Create Transfer - Success",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fromAccountNumber\": \"ACC1000000001\",\n    \"toAccountNumber\": \"ACC1000000002\",\n    \"amount\": \"100.50\",\n    \"description\": \"Payment for services\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8001/api/transfers",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8001",
+          "path": ["api", "transfers"]
+        }
+      }
+    },
+    {
+      "name": "Create Transfer - Insufficient Funds",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fromAccountNumber\": \"ACC1000000005\",\n    \"toAccountNumber\": \"ACC1000000001\",\n    \"amount\": \"100.00\",\n    \"description\": \"This should fail - insufficient funds\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8001/api/transfers",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8001",
+          "path": ["api", "transfers"]
+        }
+      }
+    },
+    {
+      "name": "Create Transfer - Account Not Found",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"fromAccountNumber\": \"INVALID_ACCOUNT\",\n    \"toAccountNumber\": \"ACC1000000001\",\n    \"amount\": \"50.00\",\n    \"description\": \"This should fail - account not found\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8001/api/transfers",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8001",
+          "path": ["api", "transfers"]
+        }
+      }
+    },
+    {
+      "name": "Get Transaction Details",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8001/api/transfers/:transactionId",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8001",
+          "path": ["api", "transfers", ":transactionId"],
+          "variable": [
+            {
+              "key": "transactionId",
+              "value": "REPLACE_WITH_ACTUAL_TRANSACTION_ID"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Get Account Transfers",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8001/api/accounts/ACC1000000001/transfers?limit=50",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8001",
+          "path": ["api", "accounts", "ACC1000000001", "transfers"],
+          "query": [
+            {
+              "key": "limit",
+              "value": "50"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
